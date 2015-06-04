@@ -18,6 +18,9 @@ use yii\widgets\ActiveForm;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Website Lelang/tender Indonesia dan LPSE ">
+    <meta name="keywords" content="Lelang, LPSE, tender">
+    <meta name="author" content="Cubiconia Indonesia">
     <title>LPSE</title>
     <?php $this->head() ?>
 </head>
