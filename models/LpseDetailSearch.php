@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\LpseDetail;
+use app\models\LpseDetailProfile;
+use yii\helpers\ArrayHelper;
 
 /**
  * LpseDetailSearch represents the model behind the search form about `app\models\LpseDetail`.
@@ -44,7 +46,6 @@ class LpseDetailSearch extends LpseDetail
     public function search($params)
     {
         $query = LpseDetail::find();
-        $query->joinWith(['lpse']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,24 +58,50 @@ class LpseDetailSearch extends LpseDetail
             return $dataProvider;
         }
 
-      /*  $query->andFilterWhere([
-            'id' => $this->id,
-            'cd' => $this->cd,
-            'cb' => $this->cb,
-            'ed' => $this->ed,
-            'eb' => $this->eb,
-            'lpse_id' => $this->lpse_id,
-        ]);
-*/
-        $query->andFilterWhere(['like', 'lpse_detail.name', $this->name]);
+// definisi kata kunci
+        $text = "";
+        $rest_list = array('status');
+
+        if(!is_null($this->name)){
+        $new_text = $this->name;
+         while (!empty($new_text)) {
+          $text = $new_text;
+          $key = explode(' ', $new_text,2);          
+          $new_text = "";
+
+          if(!empty($key[1])){
+            $res = explode(':',$key[0], 2);    
+            if(!empty($res[1])){
+              if(in_array($res[0], $rest_list)){
+                $res_text[$res[0]]=$res[1];
+                $new_text = $key[1];
+              }
+            }    
+          }
+         }        
+        }
+     
+      if(!empty($res_text['status'])){
+        $searchRes = LpseDetailProfile::find()
+            ->select('lpse_detail_id')
+            ->where(['LIKE', 'value', $res_text['status'] ])
+            ->andWhere(['profile_id' => 1])
+            ->all();
+          }else {
+            $searchRes = LpseDetailProfile::find()
+            ->select('lpse_detail_id')
+            ->where(['NOT LIKE', 'value', 'selesai'])
+            ->andWhere(['profile_id' => 1])
+            ->all();
+          }
         
-     /*   // ->orFilterWhere(['like', 'm_lpse.name', $this->name]);        
-        $query->joinWith(['lpseDetailProfiles' => function ($q) {
-        $q->where("lpse_detail_profile.value NOT LIKE '%elesai' " );
-       // $q->where("lpse_detail_profile.value NOT LIKE '%Selesai' AND lpse_detail_profile.profile_id = '1'" );
-        // $q->where(" DATE(lpse_detail_profile.value) > CURDATE() AND lpse_detail_profile.profile_id = 4" );
-        } ]);
-*/
+        $key_id = ArrayHelper::getColumn($searchRes, 'lpse_detail_id');
+        $key_id[] = 0;
+        
+        $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
+        $query->andFilterWhere(['like', 'lpse_detail.name', $text]);
+        
+
         return $dataProvider;
     }
 }

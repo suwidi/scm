@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
                     ]); 
                     ?>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Input Kunci Lelang" name="LpseDetailSearch[name]" id=""> &nbsp;
+                            <input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id=""> &nbsp;
                         </div> 
                          <div class="text-center">
                             <?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
