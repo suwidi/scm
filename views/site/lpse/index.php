@@ -22,7 +22,8 @@ use yii\widgets\ActiveForm;
     <meta name="keywords" content="Lelang, LPSE, tender">
     <meta name="author" content="Cubiconia Indonesia">
     <title>LPSE</title>
-	<?php $this->head() ?>
+	<?php $this->head();?>
+	<script src="<?php echo \Yii::$app->request->BaseUrl; ?>/temp/js/jquery-1.11.2.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@ use yii\widgets\ActiveForm;
 				]); ?>
 				</div>
 				 <div class="form-group">
-                    	<input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id="" value="<?php echo $dataPost; ?>"> &nbsp;
+                    	<input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id="src" value="<?php echo $dataPost; ?>"> &nbsp;
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
 			
                     </div>
@@ -57,12 +58,12 @@ use yii\widgets\ActiveForm;
     <div class="container">
     	<div class="row">
         	<div class="col-xs-12 sub-menu">
-            	<ul class="list-inline">
-                	<li><a href="">Category </a></li>
-                    <li><a href="">Vendor </a></li>
-                    <li><a href="">Budget </a></li>
-                    <li><a href="">Location </a></li>
-                    <li><a href="">Advanced Search </a></li>
+            	<ul class="list-inline insert_form">
+                	<li><a href="javascript:void(0)" val="status">Status </a></li>
+                    <li><a href="javascript:void(0)" val="vendor">Vendor </a></li>
+                    <li><a href="javascript:void(0)" val="budget">Budget </a></li>
+                    <li><a href="javascript:void(0)" val="location">Location </a></li>
+                    <li><a href="javascript:void(0)" val="advanced">Advanced Search </a></li>
                 </ul>
             </div>
         </div>
@@ -99,5 +100,14 @@ use yii\widgets\ActiveForm;
     	Copyright &copy; 2015 Lentice Solutions.
       </p>
     </div>
+	
+	<script>
+		$(document).ready(function (){
+			$('.insert_form > li > a').click(function (){
+				var category = $(this).attr('val');
+				$("#src").val(category+":");
+			});
+		});
+	</script>
 </body>
 </html>
