@@ -67,13 +67,14 @@ class LpseDetailSearch extends LpseDetail
         ]);
 */
         $query->andFilterWhere(['like', 'lpse_detail.name', $this->name]);
-        // ->orFilterWhere(['like', 'm_lpse.name', $this->name]);        
+        
+     /*   // ->orFilterWhere(['like', 'm_lpse.name', $this->name]);        
         $query->joinWith(['lpseDetailProfiles' => function ($q) {
-        $q->where("lpse_detail_profile.value NOT LIKE '%Selesai' " );
+        $q->where("lpse_detail_profile.value NOT LIKE '%elesai' " );
        // $q->where("lpse_detail_profile.value NOT LIKE '%Selesai' AND lpse_detail_profile.profile_id = '1'" );
         // $q->where(" DATE(lpse_detail_profile.value) > CURDATE() AND lpse_detail_profile.profile_id = 4" );
         } ]);
-
+*/
         return $dataProvider;
     }
 }
