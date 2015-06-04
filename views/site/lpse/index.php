@@ -43,7 +43,8 @@ use yii\widgets\ActiveForm;
 				]); ?>
 				</div>
 				 <div class="form-group">
-                    	<input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id="src" value="<?php echo $dataPost; ?>"> &nbsp;
+                    	<input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id="src" value="<?php echo $dataPost; ?>" 
+                        style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;"> &nbsp;
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
 			
                     </div>
