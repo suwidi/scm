@@ -61,9 +61,8 @@ use yii\widgets\ActiveForm;
             	<ul class="list-inline insert_form">
                 	<li><a href="javascript:void(0)" val="status">Status </a></li>
                     <li><a href="javascript:void(0)" val="vendor">Vendor </a></li>
+                    <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                     <li><a href="javascript:void(0)" val="budget">Budget </a></li>
-                    <li><a href="javascript:void(0)" val="location">Location </a></li>
-                    <li><a href="javascript:void(0)" val="advanced">Advanced Search </a></li>
                 </ul>
             </div>
         </div>

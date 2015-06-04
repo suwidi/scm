@@ -23,7 +23,7 @@
 					  <h5><?= $model['name'] ?> </h5>
 					</a>
 					<a href="javascript:void(0)" onclick="getWeb('<?php echo $model->lpse['link']; ?>')">
-					  <p><?= $model->lpse['link'] ?></p>
+					  <p><?= $model->lpse['name'] ?></p>
 					</a>
 					<ul class="list-inline" >
 						<?php echo $html; ?>

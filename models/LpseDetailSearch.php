@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\LpseDetail;
 use app\models\LpseDetailProfile;
+use app\models\MLpse;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -63,7 +64,7 @@ class LpseDetailSearch extends LpseDetail
       //  $rest_list= array('status','date_publish','date_start_upload','date_end_upload','lelang_name',
         //  'lelang_agenci','lelang_hps','lelang_url','lelang_lembaga','lelang_id');
         //Status, Vendor, EndDate, Category
-       $rest_list = array('1' => 'status','9'=>'lpse','4'=>"endDate",'11'=>'Category');
+       $rest_list = array('1' => 'status','4'=>'endDate','7'=>'budget','9'=>'vendor','11'=>'Category');
 
         if(!is_null($this->name)){
         $new_text = $this->name;
@@ -72,15 +73,16 @@ class LpseDetailSearch extends LpseDetail
           $key = explode(' ', $new_text,2);          
           $new_text = "";
 
-          if(!empty($key[1])){
-            $res = explode(':',$key[0], 2);    
-            if(!empty($res[1])){
-              if(in_array($res[0], $rest_list)){
-                $res_text[$res[0]]=$res[1];
-                $new_text = $key[1];
-              }
-            }    
+        if(empty($key[1])){
+          $key[1]=" ";
           }
+          $res = explode(':',$key[0], 2);    
+          if(!empty($res[1])){
+            if(in_array($res[0], $rest_list)){
+              $res_text[$res[0]]=$res[1];
+              $new_text = $key[1];
+            }
+          }   
          }        
         }
      
@@ -100,37 +102,52 @@ class LpseDetailSearch extends LpseDetail
         }
 
     }  */  
-
+    $key_id=array();
      if(!empty($res_text)){
-      foreach ($res_text as $arr_key => $value) {
-         $profile_id = array_keys($rest_list,$arr_key);
-         if(!empty($key_id)){
-          $searchRes = LpseDetailProfile::find()
-              ->select('lpse_detail_id')
-              ->where(['LIKE', 'value', $value ])
-              ->andWhere(['profile_id' => $profile_id[0]])
-              ->andWhere(['IN','lpse_detail_id',$key_id])
-              ->all();
-            }else{
-              $searchRes = LpseDetailProfile::find()
-              ->select('lpse_detail_id')
-              ->where(['LIKE', 'value', $value ])
-              ->andWhere(['profile_id' => $profile_id[0]])           
-              ->all();
-            }         
-          $key_id = array_unique(ArrayHelper::getColumn($searchRes, 'lpse_detail_id'));      
+      
+        foreach ($res_text as $arr_key => $value) {
+          $profile_id = array_keys($rest_list,$arr_key);
+          
+          $searchRes = LpseDetailProfile::find();
+          $searchRes->select('lpse_detail_id');
+          $searchRes->where(['profile_id' => $profile_id[0]]);
+          $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]);   
+          switch ($profile_id[0]) {
+             case '4':
+              $val_date = explode('-', $value);
+              if(empty($val_date[1])){
+                $val_date[1]=01;
+              }
+              if(empty($val_date[2])){
+                $val_date[2]=01;
+              }
+              $date_end = date('Y-m-d',strtotime($val_date[0].'-'.$val_date[1].'-'.$val_date[2]));
+              $searchRes->andFilterWhere(['>=', 'value', $date_end]); 
+              break;  
+            case '9':
+              $m_lpse = MLpse::find()->where(['LIKE','name',$value])->all();
+              $arr_lpse_id = ArrayHelper::getColumn($m_lpse,'id');
+              $searchRes->andFilterWhere(['IN', 'value', $arr_lpse_id]);
+              break;            
+            default:
+             $searchRes->andFilterWhere(['LIKE', 'value', $value ]);
+              break;
+          }
+                 
+          //  var_dump($searchRes->all()); 
+          $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
           $key_id[]=0;
 
-        }        
-          }else {
-            $searchRes = LpseDetailProfile::find()
-            ->select('lpse_detail_id')
-            ->where(['NOT LIKE', 'value', 'selesai'])
-            ->andWhere(['profile_id' => 1])
-           ->all();
-         }
-           
-        if(isset($key_id))$query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
+          }        
+        }else {
+          $searchRes = LpseDetailProfile::find()
+          ->select('lpse_detail_id')
+          ->where(['NOT LIKE', 'value', 'selesai'])
+          ->andWhere(['profile_id' => 1])
+          ->all();
+       }
+         
+        $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
         $query->andFilterWhere(['like', 'lpse_detail.name', $text]);        
 
         return $dataProvider;
