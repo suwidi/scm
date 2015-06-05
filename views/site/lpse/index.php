@@ -60,10 +60,11 @@ use yii\widgets\ActiveForm;
     	<div class="row">
         	<div class="col-xs-12 sub-menu">
             	<ul class="list-inline insert_form">
-                	<li><a href="javascript:void(0)" val="status">Status </a></li>
-                    <li><a href="javascript:void(0)" val="vendor">Vendor </a></li>
+                	<li><a href="javascript:void(0)" val="inStatus">Status </a></li>
+                    <li><a href="javascript:void(0)" val="inVendor">Vendor </a></li>
                     <li><a href="javascript:void(0)" val="endDate">Date </a></li>
-                    <li><a href="javascript:void(0)" val="budget">Budget </a></li>
+                    <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
+                    <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
                 </ul>
             </div>
         </div>

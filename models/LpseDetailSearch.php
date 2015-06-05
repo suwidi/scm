@@ -64,7 +64,7 @@ class LpseDetailSearch extends LpseDetail
       //  $rest_list= array('status','date_publish','date_start_upload','date_end_upload','lelang_name',
         //  'lelang_agenci','lelang_hps','lelang_url','lelang_lembaga','lelang_id');
         //Status, Vendor, EndDate, Category
-       $rest_list = array('1' => 'inStatus','4'=>'endDate','7'=>'InBudget','9'=>'inVendor','11'=>'InCategory');
+       $rest_list = array('1' => 'inStatus','4'=>'endDate','7'=>'inBudget','9'=>'inVendor','11'=>'inCategory');
 
         if(!is_null($this->name)){
         $new_text = $this->name;
