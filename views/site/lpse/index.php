@@ -104,8 +104,35 @@ use yii\widgets\ActiveForm;
 	<script>
 		$(document).ready(function (){
 			$('.insert_form > li > a').click(function (){
-				var category = $(this).attr('val');
-				$("#src").val(category+":");
+				var list_cat = [];
+				$('.insert_form > li').each(function (index, val){
+					var ld = $(this).find('a').attr('val')+":";
+					list_cat.push(ld);
+				});
+				var data_ = $(this).attr('val');	
+				$.ajax
+					({
+						type	: 'POST',
+						url		: '<?php echo \Yii::$app->urlManager->createAbsoluteUrl("site/processdata"); ?>',
+						data	: { list_cat : list_cat, value : $('#src').val(), click : data_},
+						dataType: 'json',
+						beforeSend: function() {			
+						},	
+						complete: function() {
+						}, 
+						success	: function(retval) 
+						{
+							var SearchInput = $('#src').val(retval.ret);
+							// var SearchInput = $('#src');
+							// SearchInput.val(SearchInput.val() + ' World!');
+							var strLength= data_.length + Number(1);
+							// console.log(strLength);
+							SearchInput.focus();
+							SearchInput[0].setSelectionRange(strLength, strLength);
+						}
+					});		
+				
+				
 			});
 		});
 	</script>

@@ -177,6 +177,7 @@ class SiteController extends Controller
     }
     public function actionLogin()
     {
+		
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -273,4 +274,42 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+	
+	
+	public function actionProcessdata(){	
+		// proses input
+		$ex = $this->multiexplode();
+		$xx = array_filter(explode(' ', $_POST['value']));
+		$list = '';
+		foreach ($xx as $key => $val){
+			if(preg_match("/".$_POST['click']."/", $val)) {
+			  $list[] = $key;
+			} 
+		}
+	
+		foreach ($xx as $key => $val){
+			if (!empty($list)){
+				foreach ($list as $c){	
+					unset($xx[$c]);	
+				}
+			}
+		}
+		$gabung = $_POST['click'].": ";
+		foreach ($xx as $d){
+			$gabung .=$d." ";
+		}
+		$result['ret'] = $gabung;  
+		echo json_encode($result);
+		
+	}
+	function multiexplode () {
+		$delimiters = $_POST['list_cat'];
+		$string		= $_POST['value'];
+		$ready 		= str_replace($delimiters, $delimiters[0], $string);
+		$launch 	= explode($delimiters[0], $ready);
+		
+		return  $launch;
+	}
+
+	
 }
