@@ -18,8 +18,8 @@ use yii\widgets\ActiveForm;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Website Lelang/tender Indonesia dan LPSE ">
-    <meta name="keywords" content="Lelang, LPSE, tender">
+    <meta name="description" content="Website Pengadaan Indonesia dan LPSE ">
+    <meta name="keywords" content="Lelang, LPSE, Pengadaan, procurement">
     <meta name="author" content="Cubiconia Indonesia">
     <title>LPSE</title>
     <?php $this->head() ?>
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
                     ]); 
                     ?>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Input Kata Kunci Lelang" name="LpseDetailSearch[name]" id=""> &nbsp;
+                            <input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="LpseDetailSearch[name]" id=""> &nbsp;
                         </div> 
                          <div class="text-center">
                             <?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
