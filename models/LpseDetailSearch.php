@@ -143,12 +143,13 @@ class LpseDetailSearch extends LpseDetail
           $searchRes = LpseDetailProfile::find()
           ->select('lpse_detail_id')
           ->where(['NOT LIKE', 'value', 'selesai'])
-          ->andWhere(['profile_id' => 1])
+          ->andWhere(['profile_id' => 1])          
           ->all();
        }
          
         $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
         $query->andFilterWhere(['like', 'lpse_detail.name', $text]);        
+        $query->orderBy (['ed' => SORT_DESC,'id' => SORT_DESC,]);
 
         return $dataProvider;
     }
