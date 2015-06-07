@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Website Pengadaan Indonesia dan LPSE ">
+    <meta name="description" content="Website Pengadaan Indonesia dan LPSE">
     <meta name="keywords" content="Lelang, LPSE, Pengadaan, procurement">
     <meta name="author" content="Cubiconia Indonesia">
     <title>LPSE</title>
@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
 <div class="wrap">
     	<ul class="list-inline">
         <li>
-    	<a href="<?php echo \Yii::$app->request->BaseUrl;  ?>?LpseDetailSearch[name]=">
+    	<a href="<?php echo \Yii::$app->request->BaseUrl;  ?>?q=">
         	<img src="<?php echo \Yii::$app->request->BaseUrl;  ?>/image/logo-small.png" alt="" class="logo-small">
         </a>
         </li>
@@ -43,7 +43,7 @@ use yii\widgets\ActiveForm;
 				]); ?>
 				</div>
 				 <div class="form-group">
-                    	<input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="LpseDetailSearch[name]" id="src" value="<?php echo $dataPost; ?>" 
+                    	<input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
                         style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;"> &nbsp;
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
 			
@@ -61,7 +61,7 @@ use yii\widgets\ActiveForm;
         	<div class="col-xs-12 sub-menu">
             	<ul class="list-inline insert_form">
                 	<li><a href="javascript:void(0)" val="inStatus">Status </a></li>
-                    <li><a href="javascript:void(0)" val="inVendor">Vendor </a></li>
+                    <li><a href="javascript:void(0)" val="inLpse">Lpse </a></li>
                     <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                     <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
                     <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
