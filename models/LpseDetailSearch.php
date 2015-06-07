@@ -63,7 +63,8 @@ class LpseDetailSearch extends LpseDetail
         }
 
 // definisi kata kunci
-        $text = "";      
+        $text = "";   
+        $res_text = array();        
       //  $rest_list= array('status','date_publish','date_start_upload','date_end_upload','lelang_name',
         //  'lelang_agenci','lelang_hps','lelang_url','lelang_lembaga','lelang_id');
         //Status, Vendor, EndDate, Category
@@ -89,12 +90,25 @@ class LpseDetailSearch extends LpseDetail
          }        
         }
      
-    $key_id=array();
-     if(!empty($res_text)){
-      
+
+    // status didahulukan untuk mendapat default   
+   
+    $searchRes = LpseDetailProfile::find();
+    $searchRes->select('lpse_detail_id');
+    $searchRes->where(['profile_id' => 1]);
+
+    if(array_key_exists('inStatus', $res_text)){      
+      $inStatusText =  $res_text['inStatus'];
+      $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
+    }else{
+       $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
+   }
+
+    $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
+
+    if(!empty($res_text)){
         foreach ($res_text as $arr_key => $value) {
-          $profile_id = array_keys($rest_list,$arr_key);
-          
+          $profile_id = array_keys($rest_list,$arr_key);          
           $searchRes = LpseDetailProfile::find();
           $searchRes->select('lpse_detail_id');
           $searchRes->where(['profile_id' => $profile_id[0]]);
@@ -120,21 +134,12 @@ class LpseDetailSearch extends LpseDetail
             default:
              $searchRes->andFilterWhere(['LIKE', 'value', $value ]);
               break;
-          }
-                 
+          }                 
           //  var_dump($searchRes->all()); 
           $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
-          $key_id[]=0;
-
-          }        
-        }else {
-          $searchRes = LpseDetailProfile::find()
-          ->select('lpse_detail_id')
-          ->where(['NOT LIKE', 'value', 'selesai'])
-          ->andWhere(['profile_id' => 1])          
-          ->all();
-       }
-         
+         }        
+        }
+        $key_id[]=0;  
         $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
         $query->andFilterWhere(['like', 'lpse_detail.name', $text]);                
         $query->orderBy (['ed' => SORT_DESC,'id' => SORT_DESC,]);
