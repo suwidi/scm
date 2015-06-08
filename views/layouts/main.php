@@ -40,7 +40,7 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-xs-12">
                 <p class="text-center">
-                Copyright &copy; 2015 Lentice Solutions & Cubiconia. | info@cubiconia.com
+                Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
                 </p>
             </div>
         </div>
