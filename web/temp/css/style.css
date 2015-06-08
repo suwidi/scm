@@ -53,14 +53,15 @@ footer p, .footer p {
 	background-color: #f5f5f5;
 	background-position: 5px 10px; }
 .content-search {
-	margin: 20px 0 40px 0; }
+	margin: 20px 0 20px 0; }
 .content-search h5 {
 	margin: 0 !important; }
 .content-search a p { 
 	color: #777; }
 .content-search ul {
 	margin-top: -5px !important; }
-.sub-menu { }
+.sub-menu { 
+	height:40px; }
 .sub-menu > li > a {
 	color: #C30 !important; }
 .sub-menu > li > a:hover {
