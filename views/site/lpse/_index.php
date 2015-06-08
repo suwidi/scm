@@ -22,7 +22,7 @@
 					<a href="javascript:void(0)" onclick="getWeb('<?= $model->lpse->link; ?>')">
 					  <p><?= $model->lpse->name ?></p>
 					</a>
-					<ul class="list-inline" >
+					<ul class="list-inline list-desc" >
 						<?php echo $html; ?>
 					</ul>					
 					<hr>

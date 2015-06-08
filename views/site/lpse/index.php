@@ -15,14 +15,10 @@ use yii\widgets\ActiveForm;
 <script src="<?php echo \Yii::$app->request->BaseUrl; ?>/temp/js/jquery-1.11.2.min.js"></script>
 
 <div class="wrap">
-    	<ul class="list-inline">
-        <li>
-    	<a href="<?php echo \Yii::$app->request->BaseUrl;  ?>?q=">
-        	<img src="<?php echo \Yii::$app->request->BaseUrl;  ?>/image/logo-small.png" alt="" class="logo-small">
-        </a>
-        </li>
-        <li>
-      <form method="" class="search-detail-box form-inline">
+	<div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+      			<form method="" class="form-inline form-search">
             	<div class="form-group">
 				<?php $form = ActiveForm::begin([
 					'action' => ['index'],
@@ -36,50 +32,54 @@ use yii\widgets\ActiveForm;
 			
                     </div>
                 </form>
-        </li>
-        </ul>
+		</div>
+      </div>
     </div>
-	
-	
+</div>
     
     <!-- Sub Menu -->
-    <div class="container">
-    	<div class="row">
-        	<div class="col-xs-12 sub-menu">
-            	<ul class="list-inline insert_form">
-                	<li><a href="javascript:void(0)" val="inStatus">Status </a></li>
-                    <li><a href="javascript:void(0)" val="inLpse">Lpse </a></li>
-                    <li><a href="javascript:void(0)" val="endDate">Date </a></li>
-                    <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
-                    <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-default">
+      <div class="container">
+    	<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand brand-mobile" href="#">
+             <img src="img/logo-small.png" alt="" class="">
+          </a>        
         </div>
-    </div>
-    <hr class="submenu">
+    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           	<ul class="nav navbar-nav sub-menu insert_form">
+            	<li><a href="javascript:void(0)" val="inStatus">Status </a></li>
+                <li><a href="javascript:void(0)" val="inLpse">Lpse </a></li>
+                <li><a href="javascript:void(0)" val="endDate">Date </a></li>
+                <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
+                <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
+                <li><a href="javascript:void(0)" val="">FAQ </a></li>
+            </ul>
+        </div>
+       </div>
+      
+    </nav>
     
     <!-- Content Search -->
     <div class="container">
     	<div class="row">
-          <div class="col-xs-6">
-			</br>		   
+            <div class="col-md-5 col-xs-12">	   
 			<?= 
 				ListView::widget([
 					'dataProvider' => $dataProvider,
 					'itemView' => '_index',
 				]); 
 			?>
-          </div>		  
-			<div class="col-xs-6">
-				<div class="content-ads">
-				  <b>Nama Pengadaan</b><br/>
-				  <i>sumber data<br>
-				  status, expired</br>
-				  anggaran (budget)</i>
-				</div>
-			</div>
-		 
-		  
+          	</div>		  
+			<div class="col-md-7 col-xs-12">
+                <div class="ads"></div>
+            </div>
         </div>
     </div>
     
