@@ -75,7 +75,7 @@ class SiteController extends Controller
 		
         $searchModel = new LpseDetailSearch();      
         // validasi bahwa itu dari web disini  
-		if (!isset($_GET['_csrf']) or !isset($_GET['q'])){
+		if (empty($_GET['_csrf']) or empty($_GET['q'])){
 			return $this->render('lpse/landing_page', 
 				[
 					'searchModel' 	=> $searchModel,
