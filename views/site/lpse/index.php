@@ -72,7 +72,7 @@ use yii\widgets\ActiveForm;
           </div>		  
 			<div class="col-xs-6">
 				<div class="content-ads">
-				 <small><b>Nama Pengadaan</b><br/>
+				  <b>Nama Pengadaan</b><br/>
 				  <i>sumber data<br>
 				  status, expired</br>
 				  anggaran (budget)</i>

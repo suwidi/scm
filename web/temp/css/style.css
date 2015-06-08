@@ -20,6 +20,8 @@ header {
 	top: 0px;
 	height: 50px;
 	background: #f5f5f5; }
+.navbar-nav { 
+	margin-left: -30px !important; }
 	
 footer { 
 	width: 100%; 
@@ -40,51 +42,56 @@ footer p, .footer p {
 	margin: 0 auto;}
 .logo-small {
 	margin: 10px 0 0 0;}
-
-.search-detail-box {
-	margin: 20px 0;}
-.search-detail-box input[type=text] {
-	}
+.form-search {
+	margin: 20px 0; }
+.form-search input[type=text] {
+	width: 350px;
+	margin-right:10px;	
+}
 .wrap {
-	background: #f5f5f5; }
+	background:url(../img/logo-small.png) no-repeat left top;
+	background-color: #f5f5f5;
+	background-position: 5px 10px; }
 .content-search {
-	margin: 20px 0;
-	width: 400px; }
+	margin: 20px 0 40px 0; }
 .content-search h5 {
 	margin: 0 !important; }
 .content-search a p { 
 	color: #777; }
 .content-search ul {
 	margin-top: -5px !important; }
-.sub-menu {
-	line-height: 40px;
-	height: 50px;
-	margin-left:15px; }
-.sub-menu li {
-	margin: 0 20px 0 0; }
-.sub-menu li a {
-	color: #C30; }
-.sub-menu li a:hover {
-	color:#777; }
+.sub-menu { }
+.sub-menu > li > a {
+	color: #C30 !important; }
+.sub-menu > li > a:hover {
+	color:#777 !important; }
 hr.submenu, hr { 
 	margin: 0 !important; }
-.content-result {
-	line-height: 50px; }
 .content-ads {
 	margin-top: 20px;
 	text-align: right; }
 .brand-mobile {
 	display: none; }
-	
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
+.ads {
+	background: #dadada;
+	height: 80px;
+	display:block; 
+	margin-top: 20px;}
+small {
+	color:#C30; }
+.list-desc > li {
+	margin:10px 20px 0 0; }
 
 @media (max-width: 768px) {
-	.logo-big {
-		width:40% !important;
-		padding-top: 50px;}
+	.wrap {
+		background: #f5f5f5 !important;}
+	.navbar-nav { 
+		margin-left: 0 !important; }
 	.logo-small { 
 		display: none; }
-	.search-detail-box input[type=text] {
-		margin-bottom:10px; }
+	.form-search input[type=text] {
+		margin-bottom:10px;
+		width:100%; }
+	.list-desc li {
+		display:block !important; }
  }
