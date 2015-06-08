@@ -34,17 +34,12 @@ AppAsset::register($this);
 		<?= $content ?>
     <?php $this->endBody() ?>
     <br /><br/>
+    <!-- Footer -->
+    <div class="footer navbar-fixed-bottom">
+      <p class="text-center">
+    	Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
+      </p>
+    </div>
 </body>
-  <footer>
-      <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="text-center">
-                Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
-                </p>
-            </div>
-        </div>
-      </div>
-    </footer>
 </html>
 <?php $this->endPage() ?>
