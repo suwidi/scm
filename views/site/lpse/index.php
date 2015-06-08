@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
                             'method' => 'POST',
                         ]); ?>
                     	<input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
-                        style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;">
+                        style="height: auto; z-index: 6;  outline: none;transparent;">
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
                     </div>
                 </form>
