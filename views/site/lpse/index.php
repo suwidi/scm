@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
                             'method' => 'POST',
                         ]); ?>
                     	<input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
-                        style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;"> &nbsp;
+                        style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;">
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
                     </div>
                 </form>
@@ -52,7 +52,7 @@ use yii\widgets\ActiveForm;
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
            	<ul class="nav navbar-nav sub-menu insert_form">
             	<li><a href="javascript:void(0)" val="inStatus">Status </a></li>
-                <li><a href="javascript:void(0)" val="inLpse">Lpse </a></li>
+                <li><a href="javascript:void(0)" val="inLpse">LPSE </a></li>
                 <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                 <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
                 <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
