@@ -73,21 +73,19 @@ class SiteController extends Controller
      public function actionIndex()
     {
 		
-        $searchModel = new LpseDetailSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        // validasi bahwa itu dari web disini
-  
+        $searchModel = new LpseDetailSearch();      
+        // validasi bahwa itu dari web disini  
 		if (empty($_GET['_csrf'])){
 			return $this->render('lpse/landing_page', 
 				[
 					'searchModel' 	=> $searchModel,
-					'dataProvider' 	=> $dataProvider,
 					'model' 		=> $searchModel,
                     'dataPost'      => isset($_GET['q']) ? $_GET['q']:'' ,
 				]
 			);
 			
 		}else{
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 			return $this->render('lpse/index', 
 				[
 					'searchModel' 	=> $searchModel,

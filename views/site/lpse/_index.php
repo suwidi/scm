@@ -6,10 +6,10 @@
 		}
 		if (in_array($value->profile_id,array(1,7,4,11) )){		
 			
-			$html .= '<li style="padding-right:10px">'
-							.$value->value."&nbsp;<small>
-						</small>
-					</li> ";
+			$html .= '<li>
+                        	<small>'.$value->profile->name.'</small>
+                        	<p>'.$value->value.'</p>
+                        </li>';
 		}		
 	}
 	
@@ -25,22 +25,6 @@
 					<ul class="list-inline list-desc" >
 						<?php echo $html; ?>
                         
-                        <li>
-                        	<small>Status</small>
-                        	<p>Selesai</p>
-                        </li>
-                        <li>
-                        	<small>Nama Pengadaan</small>
-                        	<p>UPPBJ Jakarta Selatan</p>
-                        </li>
-                        <li>
-                        	<small>Anggaran</small>
-                        	<p>860jt</p>
-                        </li>
-                        <li>
-                        	<small>Expired</small>
-                        	<p>21 - 27 Mei 2015</p>
-                        </li>
 					</ul>					
 					<hr>
                 </div>
