@@ -77,7 +77,8 @@ hr.submenu, hr {
 	background: #f7f7f7;
 	height: 80px;
 	display:block; 
-	margin-top: 20px;}
+	margin-top: 20px;
+	margin-bottom: 20px;}
 small {
 	color:#C30; }
 .list-desc > li {
