@@ -19,17 +19,14 @@ use yii\widgets\ActiveForm;
       <div class="row">
         <div class="col-xs-12 col-sm-12">
       			<form method="" class="form-inline form-search">
-            	<div class="form-group">
-				<?php $form = ActiveForm::begin([
-					'action' => ['index'],
-					'method' => 'POST',
-				]); ?>
-				</div>
-				 <div class="form-group">
+            		<div class="form-group">
+						<?php $form = ActiveForm::begin([
+                            'action' => ['index'],
+                            'method' => 'POST',
+                        ]); ?>
                     	<input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
                         style="height: auto; width: 320px;  z-index: 6;  outline: none;transparent;"> &nbsp;
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
-			
                     </div>
                 </form>
 		</div>
