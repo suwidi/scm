@@ -54,7 +54,7 @@ class LpseDetailSearch extends LpseDetail
         $this->load($params);
 
         $this->name = isset($params['q'])?$params['q']:'';
-        $this->name = preg_replace("/[^a-zA-Z0-9:\s]+/", " ", $this->name);
+        $this->name = preg_replace("/[^a-zA-Z0-9:\s-]+/", " ", $this->name);
         $this->name = trim($this->name);
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -98,8 +98,14 @@ class LpseDetailSearch extends LpseDetail
     $searchRes->where(['profile_id' => 1]);
 
     if(array_key_exists('inStatus', $res_text)){      
-      $inStatusText =  $res_text['inStatus'];
-      $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
+      $inStatusText =  $res_text['inStatus'];      
+      if($inStatusText[0]!='-'){
+        $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
+      }else{
+        $inStatusText = preg_replace("/-/", "", $inStatusText);   
+        $searchRes->andFilterWhere(['NOT LIKE','value',$inStatusText]);
+      }
+      
     }else{
        $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
    }
@@ -127,21 +133,38 @@ class LpseDetailSearch extends LpseDetail
               $searchRes->andFilterWhere(['>=', 'value', $date_end]); 
               break;  
             case '9':
-              $m_lpse = MLpse::find()->where(['LIKE','name',$value])->all();
+              if($value[0]!='-'){
+                $m_lpse = MLpse::find()->where(['LIKE','name',$value])->all();
+              }else{
+                $value = preg_replace("/-/", "", $value); 
+                $m_lpse = MLpse::find()->where(['NOT LIKE','name',$value])->all();
+              }              
               $arr_lpse_id = ArrayHelper::getColumn($m_lpse,'id');
               $searchRes->andFilterWhere(['IN', 'value', $arr_lpse_id]);
               break;            
             default:
-             $searchRes->andFilterWhere(['LIKE', 'value', $value ]);
-              break;
+              if($value[0]!='-'){
+                  $searchRes->andFilterWhere(['LIKE','value',$value]);
+                }else{
+                  $value = preg_replace("/-/", "", $value);   
+                  $searchRes->andFilterWhere(['NOT LIKE','value',$value]);
+                }
+            break;
           }                 
-          //  var_dump($searchRes->all()); 
-          $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
+          $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));
+          $key_id[]=0;        
          }        
         }
         $key_id[]=0;  
         $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
-        $query->andFilterWhere(['like', 'lpse_detail.name', $text]);                
+
+         if($text[0]!='-'){
+                  $query->andFilterWhere(['LIKE','lpse_detail.name',$text]);
+                }else{
+                  $text = preg_replace("/-/", "", $text);   
+                  $query->andFilterWhere(['NOT LIKE', 'lpse_detail.name', $text]);     
+                }
+                  
         $query->orderBy (['ed' => SORT_DESC,'id' => SORT_DESC,]);
 
         return $dataProvider;

@@ -76,6 +76,7 @@ class SiteController extends Controller
         $searchModel = new LpseDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         // validasi bahwa itu dari web disini
+  
 		if (empty($_GET['_csrf'])){
 			return $this->render('lpse/landing_page', 
 				[

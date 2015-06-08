@@ -13,8 +13,10 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Website Pengadaan Indonesia dan LPSE">
+    <meta name="keywords" content="Lelang, LPSE, Pengadaan, procurement">
     <?= Html::csrfMetaTags() ?>
-    <title>LPSE</title>
+    <title>LPSE</title>  
     <?php $this->head() ?>
 </head>
 <script>
@@ -31,6 +33,18 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
 		<?= $content ?>
     <?php $this->endBody() ?>
+    <br /><br/>
 </body>
+  <footer>
+      <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-center">
+                Copyright &copy; 2015 Lentice Solutions & Cubiconia. | info@cubiconia.com
+                </p>
+            </div>
+        </div>
+      </div>
+    </footer>
 </html>
 <?php $this->endPage() ?>

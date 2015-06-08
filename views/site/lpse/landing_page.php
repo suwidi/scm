@@ -12,32 +12,7 @@ use yii\widgets\ActiveForm;
 
 	AppAsset::register($this);
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Website Pengadaan Indonesia dan LPSE">
-    <meta name="keywords" content="Lelang, LPSE, Pengadaan, procurement">
-    <meta name="author" content="Cubiconia Indonesia">
-    <title>LPSE</title>
-    <?php $this->head() ?>
-</head>
-
-<body>
-    <!-- Header -->
-    <header>
-      <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                
-            </div>
-        </div>
-      </div>
-    </header>
-    
-    <div class="container">
+ <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-offset-3">
                 <img class="logo-big img-responsive" src="<?php echo \Yii::$app->request->BaseUrl;  ?>/image/logo-big.png" alt="">
@@ -58,18 +33,4 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
-    
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <p class="text-center">
-                Copyright &copy; 2015 Lentice Solutions.
-                </p>
-            </div>
-        </div>
-      </div>
-    </footer>
-</body>
-</html>
+

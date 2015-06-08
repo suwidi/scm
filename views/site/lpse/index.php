@@ -12,21 +12,8 @@ use yii\widgets\ActiveForm;
 
 	AppAsset::register($this);
 ?>
+<script src="<?php echo \Yii::$app->request->BaseUrl; ?>/temp/js/jquery-1.11.2.min.js"></script>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Website Pengadaan Indonesia dan LPSE">
-    <meta name="keywords" content="Lelang, LPSE, Pengadaan, procurement">
-    <meta name="author" content="Cubiconia Indonesia">
-    <title>LPSE</title>
-	<?php $this->head();?>
-	<script src="<?php echo \Yii::$app->request->BaseUrl; ?>/temp/js/jquery-1.11.2.min.js"></script>
-</head>
-
-<body>
 <div class="wrap">
     	<ul class="list-inline">
         <li>
@@ -82,26 +69,20 @@ use yii\widgets\ActiveForm;
 					'itemView' => '_index',
 				]); 
 			?>
-          </div>
-		  
-		  <!--
+          </div>		  
 			<div class="col-xs-6">
 				<div class="content-ads">
-				  Content Kanan
+				 <small><b>Nama Pengadaan</b><br/>
+				  <i>sumber data<br>
+				  status, expired</br>
+				  anggaran (budget)</i>
 				</div>
 			</div>
-		  -->
+		 
 		  
         </div>
     </div>
     
-    <!-- Footer -->
-    <div class="footer">
-      <p class="text-center">
-    	Copyright &copy; 2015 Lentice Solutions.
-      </p>
-    </div>
-	
 	<script>
 		$(document).ready(function (){
 			$('.insert_form > li > a').click(function (){
@@ -124,10 +105,7 @@ use yii\widgets\ActiveForm;
 						success	: function(retval) 
 						{
 							var SearchInput = $('#src').val(retval.ret);
-							// var SearchInput = $('#src');
-							// SearchInput.val(SearchInput.val() + ' World!');
 							var strLength= data_.length + Number(1);
-							// console.log(strLength);
 							SearchInput.focus();
 							SearchInput[0].setSelectionRange(strLength, strLength);
 						}
@@ -137,5 +115,3 @@ use yii\widgets\ActiveForm;
 			});
 		});
 	</script>
-</body>
-</html>
