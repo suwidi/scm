@@ -26,6 +26,10 @@
 						<?php echo $html; ?>
                         
                         <li>
+                        	<small>Status</small>
+                        	<p>Selesai</p>
+                        </li>
+                        <li>
                         	<small>Nama Pengadaan</small>
                         	<p>UPPBJ Jakarta Selatan</p>
                         </li>
