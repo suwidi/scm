@@ -66,7 +66,7 @@ use yii\widgets\ActiveForm;
     <!-- Content Search -->
     <div class="container">
     	<div class="row">
-            <div class="col-md-5 col-xs-12">	   
+            <div class="col-md-8 col-xs-12">	   
 			<?= 
 				ListView::widget([
 					'dataProvider' => $dataProvider,
@@ -74,7 +74,7 @@ use yii\widgets\ActiveForm;
 				]); 
 			?>
           	</div>		  
-			<div class="col-md-7 col-xs-12">
+			<div class="col-md-4 col-xs-12">
                 <div class="ads"></div>
             </div>
         </div>
