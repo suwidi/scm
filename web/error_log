@@ -1,0 +1,6 @@
+[26-May-2015 05:17:05 UTC] PHP Fatal error:  Class 'Url' not found in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
+[26-May-2015 05:23:25 UTC] PHP Fatal error:  Access to undeclared static property: Yii::$AppAsset in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
+[26-May-2015 05:24:22 UTC] PHP Fatal error:  Call to undefined method Yii::app() in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
+[26-May-2015 05:24:23 UTC] PHP Fatal error:  Call to undefined method Yii::app() in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
+[26-May-2015 05:25:05 UTC] PHP Fatal error:  Call to undefined method Yii::app() in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
+[26-May-2015 05:25:06 UTC] PHP Fatal error:  Call to undefined method Yii::app() in /home/k4248760/public_html/scm/frontend/views/site/lpse/landing_page.php on line 43
