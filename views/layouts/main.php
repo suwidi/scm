@@ -35,7 +35,7 @@ AppAsset::register($this);
     <?php $this->endBody() ?>
     <br /><br/>
     <!-- Footer -->
-    <div class="footer navbar-fixed-bottom">
+    <div class="footer">
       <p class="text-center">
     	Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
       </p>
