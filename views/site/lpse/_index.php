@@ -24,6 +24,19 @@
 					</a>
 					<ul class="list-inline list-desc" >
 						<?php echo $html; ?>
+                        
+                        <li>
+                        	<small>Nama Pengadaan</small>
+                        	<p>UPPBJ Jakarta Selatan</p>
+                        </li>
+                        <li>
+                        	<small>Anggaran</small>
+                        	<p>860jt</p>
+                        </li>
+                        <li>
+                        	<small>Expired</small>
+                        	<p>21 - 27 Mei 2015</p>
+                        </li>
 					</ul>					
 					<hr>
                 </div>
