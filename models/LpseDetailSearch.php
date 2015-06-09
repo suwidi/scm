@@ -98,20 +98,22 @@ class LpseDetailSearch extends LpseDetail
       $searchRes = LpseDetailProfile::find();
       $searchRes->select('lpse_detail_id');
       $searchRes->where(['profile_id' => 4]);
-      $searchRes->andFilterWhere(['>', 'value', date("Y-m-d")]); 
-      $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
+      $searchRes->andFilterWhere(['<', 'value', date("Y-m-d")]); 
+      $searchRes->groupBy('lpse_detail_id');
+      $key_id = (ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
+      $key_id[]=0;
    }
-  
+ 
   // filter on status
       $searchRes = LpseDetailProfile::find();
       $searchRes->select('lpse_detail_id');
       $searchRes->where(['profile_id' => 1]);
-  if(array_key_exists('inStatus', $res_text)){
-
+      $searchRes->groupBy('lpse_detail_id');
       if(!empty($key_id)){
           $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]); 
         }  
-        $inStatusText =  $res_text['inStatus'];      
+  if(array_key_exists('inStatus', $res_text)){
+     $inStatusText =  $res_text['inStatus'];      
         if($inStatusText[0]!='-'){
           $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
         }else{
@@ -119,11 +121,10 @@ class LpseDetailSearch extends LpseDetail
           $searchRes->andFilterWhere(['NOT LIKE','value',$inStatusText]);
         }
         
-      }else{
+      }else{       
          $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
      }
 
-    
     $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
    
 
