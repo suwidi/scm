@@ -107,7 +107,9 @@ class LpseDetailSearch extends LpseDetail
       $searchRes = LpseDetailProfile::find();
       $searchRes->select('lpse_detail_id');
       $searchRes->where(['profile_id' => 1]);
-    $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]);        
+      if(!empty($key_id)){
+          $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]); 
+        }  
         $inStatusText =  $res_text['inStatus'];      
         if($inStatusText[0]!='-'){
           $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
