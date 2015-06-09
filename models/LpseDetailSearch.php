@@ -103,10 +103,11 @@ class LpseDetailSearch extends LpseDetail
    }
   
   // filter on status
-  if(array_key_exists('inStatus', $res_text)){
       $searchRes = LpseDetailProfile::find();
       $searchRes->select('lpse_detail_id');
       $searchRes->where(['profile_id' => 1]);
+  if(array_key_exists('inStatus', $res_text)){
+
       if(!empty($key_id)){
           $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]); 
         }  
