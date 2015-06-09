@@ -108,6 +108,7 @@ class LpseDetailSearch extends LpseDetail
       
     }else{
        $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
+       $searchRes->andFilterWhere(['>', 'value', date("Y-m-d")]); 
    }
 
     $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
