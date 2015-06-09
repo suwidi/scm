@@ -98,7 +98,7 @@ class LpseDetailSearch extends LpseDetail
       $searchRes = LpseDetailProfile::find();
       $searchRes->select('lpse_detail_id');
       $searchRes->where(['profile_id' => 4]);
-      $searchRes->andFilterWhere(['<', 'value', date("Y-m-d")]); 
+      $searchRes->andFilterWhere(['>', 'value', date("Y-m-d")]); 
       $searchRes->groupBy('lpse_detail_id');
       $key_id = (ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
       $key_id[]=0;
