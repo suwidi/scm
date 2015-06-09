@@ -93,25 +93,36 @@ class LpseDetailSearch extends LpseDetail
 
     // status didahulukan untuk mendapat default   
    
-    $searchRes = LpseDetailProfile::find();
-    $searchRes->select('lpse_detail_id');
-    $searchRes->where(['profile_id' => 1]);
-
-    if(array_key_exists('inStatus', $res_text)){      
-      $inStatusText =  $res_text['inStatus'];      
-      if($inStatusText[0]!='-'){
-        $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
-      }else{
-        $inStatusText = preg_replace("/-/", "", $inStatusText);   
-        $searchRes->andFilterWhere(['NOT LIKE','value',$inStatusText]);
-      }
-      
-    }else{
-       $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
-       $searchRes->andFilterWhere(['>', 'value', date("Y-m-d")]); 
+   if(! array_key_exists('endDate', $res_text)){      
+       // $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
+      $searchRes = LpseDetailProfile::find();
+      $searchRes->select('lpse_detail_id');
+      $searchRes->where(['profile_id' => 4]);
+      $searchRes->andFilterWhere(['>', 'value', date("Y-m-d")]); 
+      $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
    }
+  
+  // filter on status
+  if(array_key_exists('inStatus', $res_text)){
+      $searchRes = LpseDetailProfile::find();
+      $searchRes->select('lpse_detail_id');
+      $searchRes->where(['profile_id' => 1]);
+    $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]);        
+        $inStatusText =  $res_text['inStatus'];      
+        if($inStatusText[0]!='-'){
+          $searchRes->andFilterWhere(['LIKE','value',$inStatusText]);
+        }else{
+          $inStatusText = preg_replace("/-/", "", $inStatusText);   
+          $searchRes->andFilterWhere(['NOT LIKE','value',$inStatusText]);
+        }
+        
+      }else{
+         $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
+     }
 
-    $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));      
+    
+    $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
+   
 
     if(!empty($res_text)){
         foreach ($res_text as $arr_key => $value) {
