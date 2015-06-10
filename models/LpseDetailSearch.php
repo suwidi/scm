@@ -173,8 +173,13 @@ class LpseDetailSearch extends LpseDetail
         }
         $key_id[]=0;  
         $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]);
-
-         if($text[0]!='-'){
+        
+        if(count($text)>7 AND $text[7]=='getToday'){          
+          $text = preg_replace("/todayUpdate/", "", $text); 
+          $query->andFilterWhere(['>=','lpse_detail.cd',date('Y-m-d')]);
+        }        
+        
+        if($text[0]!='-'){
                   $query->andFilterWhere(['LIKE','lpse_detail.name',$text]);
                 }else{
                   $text = preg_replace("/-/", "", $text);   
