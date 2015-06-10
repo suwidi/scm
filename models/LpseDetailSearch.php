@@ -172,12 +172,14 @@ class LpseDetailSearch extends LpseDetail
          }        
         }
         $key_id[]=0;  
+        
         $query->andFilterWhere(['in', 'lpse_detail.id', $key_id]); 
-        if(strlen($text)>=8 AND substr($text,0,8)=='getToday'){ 
-          $text = preg_replace("/getToday/", "", $text); 
+        if(strlen($text)>=7 AND substr($text,0,7)=='getLast'){ 
+          $text = preg_replace("/getLast/", "", $text); 
           $text = (strlen($text)==0)?' ':$text;
-          $query->andFilterWhere(['>=','lpse_detail.cd',date('Y-m-d')]);
-          echo $text;
+          $lastRecord = LpseDetail::find()->orderBy(['id' => SORT_DESC])->one();
+          $query->andFilterWhere(['>=','lpse_detail.cd',date('Y-m-d',strtotime($lastRecord->cd))]);
+          echo $lastRecord->cd;
         }        
         if($text[0]!='-'){
                   $query->andFilterWhere(['LIKE','lpse_detail.name',$text]);
