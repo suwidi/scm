@@ -16,10 +16,10 @@
 ?>
 		<div class="col-xs-12">
             	<div class="content-search">
-					<a href="javascript:void(0)" onclick="getDetil_tahap('<?= $link; ?>')">
+					<a href="<?= $link; ?>">
 					  <h5><?= $model->name ?> </h5>
 					</a>
-					<a href="javascript:void(0)" onclick="getWeb('<?= $model->lpse->link; ?>')">
+					<a href="<?= $model->lpse->link;?>">
 					  <p><?= $model->lpse->name ?></p>
 					</a>
 					<ul class="list-inline list-desc" >
@@ -30,12 +30,12 @@
                 </div>
     </div>
 	<script>
-		function getDetil_tahap(u){			
+		/*function getDetil_tahap(u){			
 			myWindow = window.open(u, "myWindow", "width=800, height=700, scrollbars=yes");
 		}
 		
 		function getWeb(u){
 				myWindow = window.open(u, "myWindow", "width=800, height=700, scrollbars=yes");
-		}
+		}*/
 	</script>
 	
