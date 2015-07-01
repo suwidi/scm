@@ -61,13 +61,8 @@ class LpseDetailSearch extends LpseDetail
             // $query->where('0=1');
             return $dataProvider;
         }
-
-// definisi kata kunci
-        $text = "";   
-        $res_text = array();        
-      //  $rest_list= array('status','date_publish','date_start_upload','date_end_upload','lelang_name',
-        //  'lelang_agenci','lelang_hps','lelang_url','lelang_lembaga','lelang_id');
-        //Status, Vendor, EndDate, Category
+       $text = " ";   
+       $res_text = array();        
        $rest_list = array('1' => 'inStatus','4'=>'endDate','7'=>'inBudget','9'=>'inLpse','11'=>'inCategory');
 
         if(!is_null($this->name)){
@@ -125,17 +120,14 @@ class LpseDetailSearch extends LpseDetail
          $searchRes->andFilterWhere(['NOT LIKE','value','selesai']);
      }
 
-    $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));  
-   
-
+    $key_id = array_unique(ArrayHelper::getColumn($searchRes->all(), 'lpse_detail_id'));     
     if(!empty($res_text)){
         foreach ($res_text as $arr_key => $value) {
           $profile_id = array_keys($rest_list,$arr_key);          
           $searchRes = LpseDetailProfile::find();
           $searchRes->select('lpse_detail_id');
-          $searchRes->where(['profile_id' => $profile_id[0]]);
-          $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]);   
-                  
+          $searchRes->where(['profile_id' => $profile_id[0]]);          
+          $searchRes->andFilterWhere(['IN','lpse_detail_id',$key_id]);                    
           switch ($profile_id[0]) {
              case '4':
               $val_date = explode('-', $value);

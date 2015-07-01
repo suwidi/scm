@@ -2,7 +2,8 @@
 namespace frontend\models;
 
 use common\models\User;
-use yii\base\InvalidParamException;
+// use yii\base\InvalidParamException;
+use yii\web\NotFoundHttpException;
 use yii\base\Model;
 use Yii;
 
@@ -12,7 +13,8 @@ use Yii;
 class ResetPasswordForm extends Model
 {
     public $password;
-
+    public $captcha;
+    public $repeatpassword;
     /**
      * @var \common\models\User
      */
@@ -29,11 +31,11 @@ class ResetPasswordForm extends Model
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('Password reset token cannot be blank.');
+            throw new NotFoundHttpException();
         }
         $this->_user = User::findByPasswordResetToken($token);
-        if (!$this->_user) {
-            throw new InvalidParamException('Wrong password reset token.');
+        if (!$this->_user) {            
+            throw new NotFoundHttpException();
         }
         parent::__construct($config);
     }
@@ -45,7 +47,18 @@ class ResetPasswordForm extends Model
     {
         return [
             ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password', 'string', 'min' => 6],            //ctype_alnum
+            ['captcha', 'required'],
+            ['captcha', 'captcha'],
+            ['repeatpassword', 'compare', 'compareAttribute'=>'password', 'message'=>"Passwords don't match"],       
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'password' => 'Password',
+            'captcha' => 'Security Code',
         ];
     }
 
