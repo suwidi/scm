@@ -2,11 +2,11 @@
 namespace frontend\controllers;
 
 use Yii;
-/*use common\models\LoginForm;
+use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use common\models\SignupForm;
-use frontend\models\ContactForm;*/
+use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -222,7 +222,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-/*
+
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -237,7 +237,7 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
-    }*/
+    }
 /*
     public function actionRequestPasswordReset()
     {
