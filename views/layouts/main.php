@@ -30,8 +30,10 @@ AppAsset::register($this);
 
 </script>
 <body>
+  <div id="wrapper">
     <?php $this->beginBody() ?>
-		<?= $content ?>
+    <?= $this->render('header.php') ?>
+    <?= $this->render('content.php',['content'=>$content]) ?>
     <?php $this->endBody() ?>
     <br /><br/>
     <!-- Footer -->
@@ -40,6 +42,7 @@ AppAsset::register($this);
     	Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
       </p>
     </div>
+  </div>
 </body>
 </html>
 <?php $this->endPage() ?>

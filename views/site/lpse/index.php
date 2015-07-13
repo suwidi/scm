@@ -3,21 +3,24 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
 use yii\widgets\ListView;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
-
 use yii\widgets\ActiveForm;
-
-	AppAsset::register($this);
+AppAsset::register($this);
 ?>
-<script src="<?php echo \Yii::$app->request->BaseUrl; ?>/temp/js/jquery-1.11.2.min.js"></script>
-
+<script src="<?php echo \Yii::$app->request->BaseUrl; ?>/js/jquery-1.11.2.min.js"></script>
+<?php
+ $auth_user = \Yii::$app->user;   
+        $customer = null; 
+       /* if ($auth_user->can('CloudApps')){               
+            $customer = customers::findOne(['email'=>$auth_user->identity->email,]);
+        }     */         
+?> 
 <div class="wrap">
 	<div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12">
+        <div class="col-xs-8 col-sm-8">
       			<form method="" class="form-inline form-search">
             		<div class="form-group">
 						<?php $form = ActiveForm::begin([
@@ -29,7 +32,87 @@ use yii\widgets\ActiveForm;
 						<?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
                     </div>
                 </form>
-		</div>
+
+      		</div>
+          <div class="col-xs-4 col-sm-4">
+    <div class='pull-right form-search'>
+      <?php if(!Yii::$app->user->isGuest){ ?>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Messages: style can be found in dropdown.less-->
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">0</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have 0 notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-users text-aqua"></i> no message
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">View all</a></li>
+                    </ul>
+                </li>
+                <!-- Tasks: style can be found in dropdown.less -->
+                <li class="dropdown tasks-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-flag-o"></i>
+                        <span class="label label-danger">0</span>
+                    </a>
+                
+                </li>
+                <!-- User Account: style can be found in dropdown.less -->
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        &bull;
+                        <span class="hidden-xs">Log Out</span>
+                    </a>
+                    <ul class="dropdown-menu" style='border:0px;padding:10px'>
+                        <!-- User image -->
+                        <li class="user-header">
+                          <i class="fa fa-users text-aqua">
+                            <p>
+                                User Name
+                                <small><?=Yii::$app->user->identity->email;?></small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                          <?php if(!($customer==null)) echo $customer->contactname; ?>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                        <?php if(!($customer==null)) { ?>
+                        <div class="pull-left ">
+                            <?= Html::a('Edit Profile', ['cloudapp/updatecust', 'id' =>$customer->id], ['class' => 'btn btn-default btn-flat']) ?> 
+                        </div>
+                        <?php } ?>    
+                            <div class="pull-right">
+                                <?= Html::a(
+                                    'Ok',
+                                    ['/site/logout'],
+                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                ) ?>
+                            </div>
+                        </li>
+                    </ul>
+                </li>            
+            </ul>
+        </div>
+           <?php } ?>
+
+
+
+       </div>
+          </div>
       </div>
     </div>
 </div>
@@ -56,13 +139,12 @@ use yii\widgets\ActiveForm;
                 <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                 <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
                 <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
-                <li><a href="javascript:void(0)" val="">FAQ </a></li>
+                <li><a href="?r=site/about" val="">About </a></li>
             </ul>
         </div>
        </div>
       
-    </nav>
-    
+    </nav>    
     <!-- Content Search -->
     <div class="container">
     	<div class="row">
@@ -75,11 +157,10 @@ use yii\widgets\ActiveForm;
 			?>
           	</div>		  
 			<div class="col-md-4 col-xs-12">
-                <div class="ads"></div>
+                <div class="ads">ads</div>
             </div>
         </div>
-    </div>
-    
+    </div>    
 	<script>
 		$(document).ready(function (){
 			$('.insert_form > li > a').click(function (){

@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+    <p>Ini adalah aplikasi yang menampilkan rangkuman pengadaan negara (LPSE)</p>
 
-    <code><?= __FILE__ ?></code>
+    <code>Dibuat oleh Cubiconia.com</code>
 </div>
