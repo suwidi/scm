@@ -13,6 +13,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+
+use app\models\AuditUser;
 use app\models\LpseDetail;
 use app\models\LpseDetailSearch;
 use yii\web\NotFoundHttpException;
@@ -65,7 +67,7 @@ class SiteController extends Controller
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'fixedVerifyCode' => YII_ENV_TEST ? 'cubiconia' : null,
             ],
         ];
     }
@@ -74,17 +76,37 @@ class SiteController extends Controller
     {
 		
         $searchModel = new LpseDetailSearch();      
-        // validasi bahwa itu dari web disini  
-		if (empty($_GET['_csrf']) or empty($_GET['q'])){
-			return $this->render('lpse/landing_page', 
-				[
-					'searchModel' 	=> $searchModel,
-					'model' 		=> $searchModel,
+        // validasi bahwa itu dari web disini 
+        $session = \Yii::$app->session;     
+
+		if (!isset($session['user']) OR !isset($_GET['q'])){   
+           $session = \Yii::$app->session;        
+           $user_id = (Yii::$app->user->isGuest)?0:\Yii::$app->user->id;
+           $data_user = $this->getClient();
+           $user_ses = array($user_id =>$data_user);               
+           $session->set('user',$user_ses );
+           //check apakah exist/
+           $model = new AuditUser();
+           $model->user_id = $user_id;
+           // $model->country_id = $data_user[];
+           $model->ip = ($data_user['ip'])?$data_user['ip']:0;
+           $model->mobile = $data_user['mobile'];
+           $model->os = $data_user['os'];
+           $model->browser = $data_user['browser'];
+           $model->mac = $data_user['mac'];
+           $model->created = date('Y-m-d H:i:s');
+           $model->save();
+           
+           //insert
+    	   return $this->render('lpse/landing_page', 
+    			[
+    				'searchModel' 	=> $searchModel,
+    				'model' 		=> $searchModel,
                     'dataPost'      => isset($_GET['q']) ? $_GET['q']:'' ,
-				]
-			);
-			
+    			]
+    		);			
 		}else{
+            // print_r($session['user']);
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 			return $this->render('lpse/index', 
 				[
@@ -178,7 +200,7 @@ class SiteController extends Controller
     }
     public function actionLogin()
     {
-		
+       // $this->layout = 'main-login';		
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -312,5 +334,138 @@ class SiteController extends Controller
 		return  $launch;
 	}
 
-	
+
+    function getClient(){
+             $ua=$this->getBrowser();
+            //$parameter['ID_REGION'] = $ [1];
+            $parameter['ip']     = $_SERVER['REMOTE_ADDR'];
+            $parameter['mobile'] = $this->isMobileDevice();
+            $parameter['os']     = $ua['platform'];
+            $parameter['browser']= $ua['name']." ".$ua['version'];
+            $parameter['mac']    = $this->getMacAddress();
+           // $parameter['NAMECOUNTRY']   = $ipInfo[0];
+            return $parameter;
+
+    }
+    function isMobileDevice(){
+            $aMobileUA = array(
+                '/iphone/i' => 'iPhone', 
+                '/ipod/i' => 'iPod', 
+                '/ipad/i' => 'iPad', 
+                '/android/i' => 'Android', 
+                '/blackberry/i' => 'BlackBerry', 
+                '/webos/i' => 'Mobile'
+            );
+            //Return true if Mobile User Agent is detected
+            foreach($aMobileUA as $sMobileKey => $sMobileOS){
+                if(preg_match($sMobileKey, $_SERVER['HTTP_USER_AGENT'])){
+                   return  $sMobileOS;   
+
+                }
+            }
+            //Otherwise return false..  
+            return "Non";
+    }
+
+    function getBrowser()
+    {
+        $u_agent = $_SERVER['HTTP_USER_AGENT'];
+        $bname = 'Unknown';
+        $platform = 'Unknown';
+        $version= "";
+
+        //First get the platform?
+        if (preg_match('/linux/i', $u_agent)) {
+            $platform = 'linux';
+        }
+        elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
+            $platform = 'Mac';
+        }
+        elseif (preg_match('/windows|win32/i', $u_agent)) {
+            $platform = 'Windows';
+        }
+       
+        // Next get the name of the useragent yes seperately and for good reason
+        if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
+        {
+            $bname = 'Internet Explorer';
+            $ub = "MSIE";
+        }
+        elseif(preg_match('/Firefox/i',$u_agent))
+        {
+            $bname = 'Mozilla Firefox';
+            $ub = "Firefox";
+        }
+        elseif(preg_match('/Chrome/i',$u_agent))
+        {
+            $bname = 'Google Chrome';
+            $ub = "Chrome";
+        }
+        elseif(preg_match('/Safari/i',$u_agent))
+        {
+            $bname = 'Apple Safari';
+            $ub = "Safari";
+        }
+        elseif(preg_match('/Opera/i',$u_agent))
+        {
+            $bname = 'Opera';
+            $ub = "Opera";
+        }
+        elseif(preg_match('/Netscape/i',$u_agent))
+        {
+            $bname = 'Netscape';
+            $ub = "Netscape";
+        }
+       
+        // finally get the correct version number
+        $known = array('Version', $ub, 'other');
+        $pattern = '#(?<browser>' . join('|', $known) .
+        ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+        if (!preg_match_all($pattern, $u_agent, $matches)) {
+            // we have no matching number just continue
+        }
+       
+        // see how many we have
+        $i = count($matches['browser']);
+        if ($i != 1) {
+            //we will have two since we are not using 'other' argument yet
+            //see if version is before or after the name
+            if (strripos($u_agent,"Version") < strripos($u_agent,$ub)){
+                $version= $matches['version'][0];
+            }
+            else {
+                $version= $matches['version'][1];
+            }
+        }
+        else {
+            $version= $matches['version'][0];
+        }
+       
+        // check if we have a number
+        if ($version==null || $version=="") {$version="?";}
+       
+        return array(
+            'userAgent' => $u_agent,
+            'name'      => $bname,
+            'version'   => $version,
+            'platform'  => $platform,
+            'pattern'    => $pattern
+        );
+    }
+
+function getMacAddress(){      
+            $_IP_ADDRESS = $_SERVER['REMOTE_ADDR'];   
+            $cmd = "arp -a $_IP_ADDRESS";
+            ob_start();
+            system($cmd);
+            $mac = ob_get_contents();
+            ob_clean();
+            $ex = strstr($mac, $_IP_ADDRESS);
+            $ex_string = explode($_IP_ADDRESS, str_replace(" ", "", $ex));
+            if(isset($ex_string[1])){
+                $mac = substr($ex_string[1], 0, 17);
+                return $mac;
+            }           
+        
+	}
 }
