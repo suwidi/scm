@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -9,24 +10,23 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                <?= $form->field($model, 'username') ?>
-                <?= $form->field($model, 'password')->passwordInput() ?>
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-4 company-form">
+        <div class="h-10"></div>
+        <h1>Login</h1>
+        <div class="h-10"></div>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>                
+            <div class="form-group">
+                <?= $form->field($model, 'username')->textInput(array('placeholder' => 'Email'));  ?>
+                <?= $form->field($model, 'password')->passwordInput(array('placeholder' => 'Password')) ?>
+                <?= $form->field($model, 'captcha')->widget(Captcha::className())->label(false) ?>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                </div>
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-            <?php ActiveForm::end(); ?>
-        </div>
+            </div>
+            <div style="text-align:right">                      
+                &nbsp;&nbsp;&nbsp;&nbsp;     
+                <?= Html::submitButton("<i class='fa fa-check-circle'></i>&nbsp; Login", ['class' => 'btn btn-danger', 'name' => 'login-button']) ?>
+            </div>
+        <div class="h-10"></div>
+        <?php ActiveForm::end(); ?>                  
     </div>
 </div>
