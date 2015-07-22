@@ -16,10 +16,10 @@
 ?>
 		<div class="col-xs-12">
             	<div class="content-search">
-					<a href="<?= $link; ?>">
+					<a href="<?= $link; ?>" target="_blank">
 					  <h5><?= $model->name ?> </h5>
 					</a>
-					<a href="<?= $model->lpse->link;?>">
+					<a href="<?= $model->lpse->link;?>" target="_blank">
 					  <p><?= $model->lpse->name ?></p>
 					</a>
 					<ul class="list-inline list-desc" >
