@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 <link rel="stylesheet" href="<?php echo \Yii::$app->request->BaseUrl; ?>/fonts/css/font-awesome.min.css">
 
 
-<div class="wrap"  onclick="location.href='index.php'">
+<div class="wrap">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-xs-12">
