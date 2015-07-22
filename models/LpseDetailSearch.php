@@ -180,8 +180,8 @@ class LpseDetailSearch extends LpseDetail
                   $query->andFilterWhere(['NOT LIKE', 'lpse_detail.name', $text]);     
                 }
                   
-        $query->orderBy (['ed' => SORT_DESC,'id' => SORT_DESC,]);
-
+        // $query->orderBy (['ed' => SORT_DESC,'id' => SORT_DESC,]);
+        $query->orderBy (['id' => SORT_DESC,]);
         return $dataProvider;
     }
 }
