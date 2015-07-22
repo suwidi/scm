@@ -133,6 +133,18 @@ class SiteController extends Controller
         ]);
     }
 
+ /**
+     * Displays a single LpseDetail model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionHelp()
+    {
+        return $this->render('help/index', [
+            
+        ]);
+    }
+
     /**
      * Creates a new LpseDetail model.
      * If creation is successful, the browser will be redirected to the 'view' page.
