@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:xhtml="http://www.w3.org/1999/xhtml"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--Default Education URLs with international legacy Alternate-->
+<url>
+<loc>http://scm.cubiconia.com/?r=site/help</loc>
+<xhtml:link rel="alternate" hreflang="en-us" href="https://scm.cubiconia.com/site/help" />
+<changefreq>Weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://scm.cubiconia.com/?r=site/about</loc>
+<xhtml:link rel="alternate" hreflang="en-us" href="https://scm.cubiconia.com/site/about" />
+<changefreq>Weekly</changefreq>
+<priority>0.8</priority>
+</url>
