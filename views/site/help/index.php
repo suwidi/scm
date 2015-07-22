@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 <link rel="stylesheet" href="<?php echo \Yii::$app->request->BaseUrl; ?>/fonts/css/font-awesome.min.css">
 
 
-<div class="wrap">
+<div class="wrap"  onclick="location.href='index.php'">
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-xs-12">
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
                             'method' => 'POST',
 
                         ]); ?>
-                        <input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
+                        <input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="" 
                         style="height: auto; z-index: 6;  outline: none;transparent;">
                                   <?= Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
                 </div>
@@ -59,7 +59,6 @@ use yii\widgets\ActiveForm;
                 <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                 <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
                 <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
-                <li><a href="?r=site/help" val="">Help </a></li>
                 <li><a href="?r=site/about" val="">About </a></li>
             </ul>
                <ul class="nav navbar-nav navbar-right side-menu">
@@ -123,11 +122,72 @@ use yii\widgets\ActiveForm;
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-xs-12">   
-            <?= 
-                ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemView' => '_index',       ]); 
-            ?>
+            <div class="col-xs-12">
+              <div class="content-search">
+          <a href="#">
+            <h4>inStatus</h4>
+          </a>        
+          <p>Digunakan untuk melakukan pembatasan/filter berdasar status</p>   
+          <small>Contoh</small>
+            <p><ul> 
+              <li>inStatus:-kontrak</li>
+              <li>inStatus:selesai</li></ul>
+            </p>
+            <small>Aturan Penggunaaan</small>
+            <p>
+            <ul> 
+              <li>Isian dalam format text satu kata atau potongan kata</li>
+              <li>Tanda baca yang diijinkan hanya - (minus) yang berarti membuang text</li>
+              <li>Bisa dikombinasikan dengan tools yang lain</li>
+              <li>Secara default (bawaan) pengadaan yang sudah <b>selesai</b> tidak ditampilkan</li>
+              
+            </ul>  
+            </p>   
+                
+          <hr>
+          </div>
+           <div class="content-search">
+          <a href="#">
+            <h4>inLpse</h4>
+          </a>        
+          <p>Digunakan untuk melakukan pembatasan/filter berdasar nama Lembaga Penyedia/LPSE</p>   
+          <small>Contoh</small>
+            <p><ul> 
+              <li>inLpse:-kabupaten</li>
+              <li>inLpse:Kementerian</li></ul>
+            </p>
+            <small>Aturan Penggunaaan</small>
+            <p>
+            <ul> 
+              <li>Isian dalam format text satu kata atau potongan kata</li>
+              <li>Tanda baca yang diijinkan hanya - (minus) yang berarti membuang text</li>
+              <li>Bisa dikombinasikan dengan tools yang lain</li>              
+            </ul>  
+            </p>   
+                
+          <hr>
+          </div>
+            <div class="content-search">
+          <a href="#">
+            <h4>endDate</h4>
+          </a>        
+          <p>Digunakan untuk menampilkan data expired pada periode diatas waktu yang ditentukan</p>   
+          <small>Contoh</small>
+           <p><ul> 
+              <li>endDate:2016-07</li>
+              <li>endDate:2015-07-28</li></ul>
+            </p>
+            <small>Aturan Penggunaaan</small>
+            <p>
+            <ul> 
+              <li>Isian dalam format tanggal (YYYY-MM-DD) dengan format lengkap atau sebagian, ie. 2015 artinya 2015-01-01</li>
+              <li>Bisa dikombinasikan dengan tools yang lain</li>              
+            </ul>  
+            </p>   
+                
+          <hr>
+          </div>
+    </div>
             </div>        
             <div class="col-md-4 col-xs-12">
                 <div class="ads"></div>
