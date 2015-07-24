@@ -85,7 +85,6 @@ class LpseDetailSearch extends LpseDetail
          }        
         }
      
-
     // status didahulukan untuk mendapat default   
    
    if(! array_key_exists('endDate', $res_text)){      

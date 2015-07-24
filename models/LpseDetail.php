@@ -17,6 +17,8 @@ use Yii;
  * @property integer $orig_lpse_id
  * @property integer $orig_lelang_id
  * @property string $last_status
+ * @property string $expired
+ * @property string $budget
  *
  * @property MLpse $lpse
  * @property LpseDetailProfile[] $lpseDetailProfiles
@@ -38,9 +40,10 @@ class LpseDetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cd', 'ed'], 'safe'],
-            [['cb', 'eb', 'lpse_id', 'orig_lpse_id', 'orig_lelang_id'], 'integer'],
+            [['cd', 'ed', 'expired'], 'safe'],
+            [['cb', 'eb', 'lpse_id', 'orig_lpse_id', 'orig_lelang_id', 'budget'], 'integer'],
             [['name'], 'string'],
+            [['budget'], 'required'],
             [['last_status'], 'string', 'max' => 255]
         ];
     }
@@ -61,6 +64,8 @@ class LpseDetail extends \yii\db\ActiveRecord
             'orig_lpse_id' => 'Orig Lpse ID',
             'orig_lelang_id' => 'Orig Lelang ID',
             'last_status' => 'Last Status',
+            'expired' => 'Expired',
+            'budget' => 'Budget',
         ];
     }
 
