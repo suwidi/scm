@@ -37,8 +37,18 @@ AppAsset::register($this);
     <?php $this->endBody() ?>
     <br /><br/>
     <!-- Footer -->
+    <?php
+      $command = Yii::$app->db->createCommand("SELECT
+            SUM(IF (t1.`last_status` NOT LIKE '%Selesai',1,0)) AS 'activetotal',
+            SUM(IF (t1.`last_status` NOT LIKE '%Selesai',budget,0)) AS 'activebudget',
+            count(*) AS total, sum(`budget`) AS budget
+            FROM  lpse_detail t1 ");
+        $dataStatistic = $command->queryAll();    
+    ?>
     <div class="footer">
       <p class="text-center">
+      Tersedia pengadaan Rp.<?= number_format($dataStatistic[0]['activebudget']) ?> dari <?=number_format($dataStatistic[0]['activetotal'])?> pengadaan aktif
+      <br>
     	Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
       </p>
     </div>
