@@ -14,9 +14,13 @@ use Yii;
  * @property integer $eb
  * @property integer $lpse_id
  * @property string $name
+ * @property integer $orig_lpse_id
+ * @property integer $orig_lelang_id
+ * @property string $last_status
  *
  * @property MLpse $lpse
  * @property LpseDetailProfile[] $lpseDetailProfiles
+ * @property TmpKeys[] $tmpKeys
  */
 class LpseDetail extends \yii\db\ActiveRecord
 {
@@ -35,8 +39,9 @@ class LpseDetail extends \yii\db\ActiveRecord
     {
         return [
             [['cd', 'ed'], 'safe'],
-            [['cb', 'eb', 'lpse_id'], 'integer'],
-            [['name'], 'string']
+            [['cb', 'eb', 'lpse_id', 'orig_lpse_id', 'orig_lelang_id'], 'integer'],
+            [['name'], 'string'],
+            [['last_status'], 'string', 'max' => 255]
         ];
     }
 
@@ -53,6 +58,9 @@ class LpseDetail extends \yii\db\ActiveRecord
             'eb' => 'Eb',
             'lpse_id' => 'Lpse ID',
             'name' => 'Name',
+            'orig_lpse_id' => 'Orig Lpse ID',
+            'orig_lelang_id' => 'Orig Lelang ID',
+            'last_status' => 'Last Status',
         ];
     }
 
@@ -70,5 +78,13 @@ class LpseDetail extends \yii\db\ActiveRecord
     public function getLpseDetailProfiles()
     {
         return $this->hasMany(LpseDetailProfile::className(), ['lpse_detail_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTmpKeys()
+    {
+        return $this->hasMany(TmpKeys::className(), ['lpse_detail_id' => 'id']);
     }
 }
