@@ -47,8 +47,8 @@ AppAsset::register($this);
     ?>
     <div class="footer">
       <p class="text-center">
-      Tersedia pengadaan Rp.<?= number_format($dataStatistic[0]['activebudget']) ?> dari <?=number_format($dataStatistic[0]['activetotal'])?> pengadaan aktif
-      <br>
+      <small>Tersedia Rp.<?= number_format($dataStatistic[0]['activebudget']) ?> dari <?=number_format($dataStatistic[0]['activetotal'])?> item pengadaan aktif&nbsp;|&nbsp;
+      <i>(keseluruhan Rp.<?= number_format($dataStatistic[0]['budget']) ?> dari <?= number_format($dataStatistic[0]['total']) ?> data terkumpul)</i></small><br>
     	Copyright &copy; 2015 Lentice Solutions & Cubiconia | info@cubiconia.com
       </p>
     </div>
