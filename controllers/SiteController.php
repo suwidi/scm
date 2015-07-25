@@ -77,14 +77,12 @@ class SiteController extends Controller
 		
         $searchModel = new LpseDetailSearch();      
         // validasi bahwa itu dari web disini 
-        $session = \Yii::$app->session;     
-
+        $session = \Yii::$app->session;
 		if (!isset($session['user']) OR !isset($_GET['q'])){   
            $session = \Yii::$app->session;        
            $user_id = (Yii::$app->user->isGuest)?0:\Yii::$app->user->id;
            $data_user = $this->getClient();
-           $user_ses = array($user_id =>$data_user);               
-           $session->set('user',$user_ses );
+          
            //check apakah exist/
            $model = new AuditUser();
            $model->user_id = $user_id;
@@ -96,23 +94,20 @@ class SiteController extends Controller
            $model->mac = $data_user['mac'];
            $model->created = date('Y-m-d H:i:s');
            $model->save();
-           
-           //insert
+           $data_user['audit_user_id'] = $model->id;           
+           $user_ses = array($user_id =>$data_user);               
+           $session->set('user',$user_ses );           
+         
     	   return $this->render('lpse/landing_page', 
     			[
-    				'searchModel' 	=> $searchModel,
-    				'model' 		=> $searchModel,
                     'dataPost'      => isset($_GET['q']) ? $_GET['q']:'' ,
     			]
     		);			
 		}else{
-            // print_r($session['user']);
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
 			return $this->render('lpse/index', 
 				[
-					'searchModel' 	=> $searchModel,
 					'dataProvider' 	=> $dataProvider,
-					'model' 		=> $searchModel,
 					'dataPost' 		=> isset($_GET['q']) ? $_GET['q']:'' ,
 				]
 			);
@@ -348,7 +343,7 @@ class SiteController extends Controller
 
 
     function getClient(){
-             $ua=$this->getBrowser();
+            $ua=$this->getBrowser();
             //$parameter['ID_REGION'] = $ [1];
             $parameter['ip']     = $_SERVER['REMOTE_ADDR'];
             $parameter['mobile'] = $this->isMobileDevice();
