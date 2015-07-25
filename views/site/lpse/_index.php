@@ -4,11 +4,14 @@
 		if ($value->profile_id == 8){
 			$link = $value->value;
 		}
-		if (in_array($value->profile_id,array(1,7,4,11) )){		
-			
+		if (in_array($value->profile_id,array(1,7,4,11) )){	
+			$text = $value->value;
+			if(strlen($text)> 40){
+				$text = substr($text,0,10)." ..... ".substr($text,-15);
+			}				
 			$html .= '<li>
                         	<small>'.$value->profile->name.'</small>
-                        	<p>'.$value->value.'</p>
+                        	<p>'.$text.'</p>
                         </li>';
 		}		
 	}
@@ -23,6 +26,7 @@
 					  <p><?= $model->lpse->name ?></p>
 					</a>
 					<ul class="list-inline list-desc" >
+              
 						<?php echo $html; ?>
                         
 					</ul>					

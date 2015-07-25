@@ -121,9 +121,9 @@ use yii\widgets\ActiveForm;
     <!-- Content Search -->
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-xs-12">   
-            <div class="col-xs-12">
-              <div class="content-search">
+         <div class="col-md-8 col-xs-12">   
+                 
+            <div class="content-search">
           <a href="#">
             <h4>inStatus</h4>
           </a>        
@@ -135,9 +135,10 @@ use yii\widgets\ActiveForm;
             </p>
             <small>Aturan Penggunaaan</small>
             <p>
-            <ul> 
+            <ul>
+              <li>Gunakakan tanda <b>"-"</b> (minus) untuk tidak menampilkan data tersebut</li>
+              <li>Jika inStatus di seting maka data periode terdahulu tetap akan ditampilkan</li>
               <li>Isian dalam format text satu kata atau potongan kata</li>
-              <li>Tanda baca yang diijinkan hanya - (minus) yang berarti membuang text</li>
               <li>Bisa dikombinasikan dengan tools yang lain</li>
               <li>Secara default (bawaan) pengadaan yang sudah <b>selesai</b> tidak ditampilkan</li>
               
@@ -154,32 +155,37 @@ use yii\widgets\ActiveForm;
           <small>Contoh</small>
             <p><ul> 
               <li>inLpse:-kabupaten</li>
+              <li>inLpse:Bogor</li>
               <li>inLpse:Kementerian</li></ul>
             </p>
             <small>Aturan Penggunaaan</small>
             <p>
             <ul> 
+              <li>Gunakakan tanda <b>"-"</b> (minus) untuk tidak menampilkan data tersebut</li>
               <li>Isian dalam format text satu kata atau potongan kata</li>
-              <li>Tanda baca yang diijinkan hanya - (minus) yang berarti membuang text</li>
               <li>Bisa dikombinasikan dengan tools yang lain</li>              
             </ul>  
             </p>   
                 
           <hr>
           </div>
-            <div class="content-search">
+           
+           <div class="content-search">
           <a href="#">
             <h4>endDate</h4>
           </a>        
           <p>Digunakan untuk menampilkan data expired pada periode diatas waktu yang ditentukan</p>   
           <small>Contoh</small>
            <p><ul> 
+              <li>endDate:-2015</li>
               <li>endDate:2016-07</li>
               <li>endDate:2015-07-28</li></ul>
             </p>
             <small>Aturan Penggunaaan</small>
             <p>
             <ul> 
+              <li>Gunakakan tanda <b>"-"</b> (minus) untuk menampilkan data dibawah periode ditersebut</li>
+              <li>Jika endDate di seting maka data expired tetap akan ditampilkan</li>
               <li>Isian dalam format tanggal (YYYY-MM-DD) dengan format lengkap atau sebagian, ie. 2015 artinya 2015-01-01</li>
               <li>Bisa dikombinasikan dengan tools yang lain</li>              
             </ul>  
@@ -187,8 +193,51 @@ use yii\widgets\ActiveForm;
                 
           <hr>
           </div>
-    </div>
-            </div>        
+     <div class="content-search">
+            <a href="#">
+              <h4>inBudget</h4>
+            </a>        
+            <p>Digunakan untuk menampilkan data dengan anggaran yang ditentukan</p>   
+            <small>Contoh</small>
+             <p><ul> 
+                <li>inBudget:-5M</li>
+                <li>inBudget:-500Jt</li>
+                <li>inBudget:50.000.000</li></ul>
+              </p>
+              <small>Aturan Penggunaaan</small>
+              <p>
+              <ul> 
+                <li>Gunakakan tanda <b>"-"</b> (minus) untuk menampilkan data dibawah nilai ditersebut</li>
+                <li>Format nilai dapat menggunakan akhiran <b>"M"</b> untuk Milyar atau <b>"Jt"</b> untuk Juta</li>              
+              </ul>  
+              </p>   
+                  
+            <hr>
+            </div>
+              <div class="content-search">
+            <a href="#">
+              <h4>inCategory</h4>
+            </a>        
+            <p>Digunakan untuk menampilkan data pada kategory tertentu</p>   
+            <small>Contoh</small>
+             <p><ul> 
+                <li>inCategory:Pengadaan</li>
+                <li>inCategory:-Konstruksi</li>
+                </ul>
+              </p>
+              <small>Aturan Penggunaaan</small>
+              <p>
+              <ul> 
+                <li>Gunakakan tanda <b>"-"</b> (minus) untuk menampilkan data dibawah nilai ditersebut</li>
+                <li>Isian dalam format text satu kata atau potongan kata</li>
+                <li>Bisa dikombinasikan dengan tools yang lain</li>                    
+              </ul>  
+              </p>   
+                  
+            <hr>
+            </div> 
+      </div>
+
             <div class="col-md-4 col-xs-12">
                 <div class="ads"></div>
             </div>
