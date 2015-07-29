@@ -112,8 +112,6 @@ class SiteController extends Controller
                    $textSearch->count =1;
                    $textSearch->text=$_GET['q'];
                    $textSearch->save();
-                   var_dump($textSearch->getErrors());die;
-
                 }
             }
             
