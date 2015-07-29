@@ -104,7 +104,7 @@ class SiteController extends Controller
             // update text log
             if(!empty($_GET['q'])){
                 $text = preg_replace("/[^a-zA-Z0-9:\s-\s.]+/", " ", $_GET['q']);
-                $textSearch = AuditText::findOne(['text' => $text);
+                $textSearch = AuditText::findOne(['text' => $text]);
                 if(!empty($textSearch)){
                     $textSearch->count = $textSearch->count+1;
                     $textSearch->save();
