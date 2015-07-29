@@ -103,14 +103,15 @@ class SiteController extends Controller
             $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
             // update text log
             if(!empty($_GET['q'])){
-                $textSearch = AuditText::findOne(['text' => $_GET['q'],]);
+                $text = preg_replace("/[^a-zA-Z0-9:\s-\s.]+/", " ", $_GET['q']);
+                $textSearch = AuditText::findOne(['text' => $text);
                 if(!empty($textSearch)){
                     $textSearch->count = $textSearch->count+1;
                     $textSearch->save();
                 }else{
                    $textSearch = new AuditText;
                    $textSearch->count =1;
-                   $textSearch->text=$_GET['q'];
+                   $textSearch->text= $text; 
                    $textSearch->save();
                 }
             }
