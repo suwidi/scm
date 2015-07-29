@@ -1,5 +1,5 @@
 <?php
-use dmstr\widgets\Alert;
+use frontend\widgets\Alert;
 ?>
 <div>
     <section class="content">

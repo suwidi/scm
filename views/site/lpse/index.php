@@ -38,10 +38,6 @@ use frontend\assets\AppAsset;
     </div>
 </div>
 
-    
-
-
-
   <!-- Sub Menu -->
 
   <nav class="navbar navbar-default">
