@@ -3,12 +3,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use common\models\SignupForm;
-use frontend\models\ContactForm;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
+//use frontend\models\PasswordResetRequestForm;
+//use frontend\models\ResetPasswordForm;
+//use common\models\SignupForm;
+//use frontend\models\ContactForm;
+// use yii\base\InvalidParamException;
+// use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -75,18 +75,14 @@ class SiteController extends Controller
      public function actionIndex()
     {
 		
-        $searchModel = new LpseDetailSearch();      
-        // validasi bahwa itu dari web disini 
+        $searchModel = new LpseDetailSearch();   
         $session = \Yii::$app->session;
-		if (!isset($session['user']) OR !isset($_GET['q'])){   
+		if (!isset($session['user'])){   
            $session = \Yii::$app->session;        
            $user_id = (Yii::$app->user->isGuest)?0:\Yii::$app->user->id;
            $data_user = $this->getClient();
-          
-           //check apakah exist/
            $model = new AuditUser();
            $model->user_id = $user_id;
-           // $model->country_id = $data_user[];
            $model->ip = ($data_user['ip'])?$data_user['ip']:0;
            $model->mobile = $data_user['mobile'];
            $model->os = $data_user['os'];
@@ -116,95 +112,13 @@ class SiteController extends Controller
         
     }
 
-    /**
-     * Displays a single LpseDetail model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
- /**
-     * Displays a single LpseDetail model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionHelp()
     {
         return $this->render('help/index', [
             
         ]);
     }
-
-    /**
-     * Creates a new LpseDetail model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new LpseDetail();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing LpseDetail model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing LpseDetail model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the LpseDetail model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return LpseDetail the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = LpseDetail::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
+    
     public function actionLogin()
     {
        // $this->layout = 'main-login';		
@@ -216,7 +130,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
-            return $this->render('login', [
+            return $this->render('user/login', [
                 'model' => $model,
             ]);
         }
@@ -225,34 +139,15 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
-
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
-            }
-
-            return $this->refresh();
-        } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
-        }
-    }
-
+   
    public function actionAbout()
     {
-        return $this->render('about');
+        return $this->render('about/index');
     }
 
-    public function actionSignup()
+    /*public function actionSignup()
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
@@ -262,11 +157,10 @@ class SiteController extends Controller
                 }
             }
         }
-
-        return $this->render('signup', [
+        return $this->render('user/signup', [
             'model' => $model,
         ]);
-    }
+    }*/
 /*
     public function actionRequestPasswordReset()
     {
@@ -332,7 +226,22 @@ class SiteController extends Controller
 		echo json_encode($result);
 		
 	}
-	function multiexplode () {
+     /**
+     * Finds the LpseDetail model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return LpseDetail the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = LpseDetail::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+	protected function multiexplode () {
 		$delimiters = $_POST['list_cat'];
 		$string		= $_POST['value'];
 		$ready 		= str_replace($delimiters, $delimiters[0], $string);
@@ -340,21 +249,19 @@ class SiteController extends Controller
 		
 		return  $launch;
 	}
-
-
-    function getClient(){
+    protected function getClient(){
             $ua=$this->getBrowser();
             //$parameter['ID_REGION'] = $ [1];
             $parameter['ip']     = $_SERVER['REMOTE_ADDR'];
             $parameter['mobile'] = $this->isMobileDevice();
             $parameter['os']     = $ua['platform'];
             $parameter['browser']= $ua['name']." ".$ua['version'];
-            $parameter['mac']    = $this->getMacAddress();
+            $parameter['mac']    = '';
            // $parameter['NAMECOUNTRY']   = $ipInfo[0];
             return $parameter;
 
     }
-    function isMobileDevice(){
+   protected function isMobileDevice(){
             $aMobileUA = array(
                 '/iphone/i' => 'iPhone', 
                 '/ipod/i' => 'iPod', 
@@ -373,8 +280,7 @@ class SiteController extends Controller
             //Otherwise return false..  
             return "Non";
     }
-
-    function getBrowser()
+   protected function getBrowser()
     {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $bname = 'Unknown';
@@ -460,19 +366,4 @@ class SiteController extends Controller
         );
     }
 
-function getMacAddress(){      
-            $_IP_ADDRESS = $_SERVER['REMOTE_ADDR'];   
-            $cmd = "arp -a $_IP_ADDRESS";
-            ob_start();
-            system($cmd);
-            $mac = ob_get_contents();
-            ob_clean();
-            $ex = strstr($mac, $_IP_ADDRESS);
-            $ex_string = explode($_IP_ADDRESS, str_replace(" ", "", $ex));
-            if(isset($ex_string[1])){
-                $mac = substr($ex_string[1], 0, 17);
-                return $mac;
-            }           
-        
-	}
 }
