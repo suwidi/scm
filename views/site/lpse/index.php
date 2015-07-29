@@ -1,20 +1,22 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 use frontend\assets\AppAsset;
-use frontend\widgets\Alert;
-use yii\widgets\ActiveForm;
     AppAsset::register($this);
 ?>
+
 
 <script src="<?php echo \Yii::$app->request->BaseUrl; ?>/js/jquery-1.11.2.min.js"></script>
 <link rel="stylesheet" href="<?php echo \Yii::$app->request->BaseUrl; ?>/fonts/css/font-awesome.min.css">
 
-
 <div class="wrap">
+    <div class="link-logo">
+      <a href="http://scm.cubiconia.com">
+        <img src="img/logo-small.png" alt="" class="">
+      </a>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-xs-12">
@@ -23,7 +25,6 @@ use yii\widgets\ActiveForm;
                                   <?php $form = ActiveForm::begin([
                             'action' => ['index'],
                             'method' => 'POST',
-
                         ]); ?>
                         <input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="src" value="<?php echo $dataPost; ?>" 
                         style="height: auto; z-index: 6;  outline: none;transparent;">
@@ -31,15 +32,20 @@ use yii\widgets\ActiveForm;
                 </div>
             </form>
             </div>
-        <div class="col-md-4 col-xs-12">          
+        <div class="col-md-4 col-xs-12">       
         </div>
       </div>
     </div>
 </div>
+
     
 
+
+
   <!-- Sub Menu -->
+
   <nav class="navbar navbar-default">
+
     <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -48,10 +54,10 @@ use yii\widgets\ActiveForm;
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand brand-mobile" href="#">
+          <a class="navbar-brand brand-mobile" href="http://scm.cubiconia.com">
              <img src="img/logo-small.png" alt="" class="">
-          </a>        
-      </div>
+          </a> 
+        </div>
            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav sub-menu insert_form">
               <li><a href="javascript:void(0)" val="inStatus">Status </a></li>
@@ -59,8 +65,8 @@ use yii\widgets\ActiveForm;
                 <li><a href="javascript:void(0)" val="endDate">Date </a></li>
                 <li><a href="javascript:void(0)" val="inBudget">Budget </a></li>
                 <li><a href="javascript:void(0)" val="inCategory">Category </a></li>
-                <li><a href="?r=site/help" val="">Help </a></li>
-                <li><a href="?r=site/about" val="">About </a></li>
+                <li><a href="<?php echo \Yii::$app->request->BaseUrl; ?>/help">Help </a></li>
+                <li><a href="<?php echo \Yii::$app->request->BaseUrl; ?>/about">About</a></li>
             </ul>
                <ul class="nav navbar-nav navbar-right side-menu">
                 <?php if(!Yii::$app->user->isGuest){ ?>
@@ -72,7 +78,9 @@ use yii\widgets\ActiveForm;
                   <li><a href="#">Action</a></li>
                   <li><a href="#">Another action</a></li>
                 </ul>
+
               </li>
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-gear fa-lg"></i>
@@ -90,6 +98,7 @@ use yii\widgets\ActiveForm;
                   <li><a href="#"><i class="fa fa-user"></i>&nbsp; User Profile</a></li>
                   <li>
                   <?= Html::a(
+
                                     '&nbsp; Sign out',
                                     ['/site/logout'],
                                     ['data-method' => 'post', 'class' => 'fa fa-sign-out']
@@ -115,9 +124,7 @@ use yii\widgets\ActiveForm;
               <?php } ?>
           </ul>
        </div>
-    </div>
-     
-
+    </div>    
   </nav>
     <!-- Content Search -->
     <div class="container">
@@ -130,7 +137,15 @@ use yii\widgets\ActiveForm;
             ?>
             </div>        
             <div class="col-md-4 col-xs-12">
-                <div class="ads"></div>
+                <p><small>Ads</small></p>
+                <ul class="list-iklan list-unstyled">
+                  <li><a href="http://cubiconia.com/index.php/products/view/hcm-pricing">
+                    <span class="text-ads1">Free Human Resources Management System</span><br>HRD and Instant Payroll Application with Enterprise Feature
+                  </a></li>
+                  <li><a href="http://cubiconia.com/index.php/products/view/accounting-pricing">
+                    <span class="text-ads1">Free Accounting System</span><br>Accounting Application for SOHO with Advanced Ability
+                  </a></li>
+                </ul>
             </div>
         </div>
     </div>
@@ -160,9 +175,8 @@ use yii\widgets\ActiveForm;
               SearchInput.focus();
               SearchInput[0].setSelectionRange(strLength, strLength);
             }
-          });   
-        
-        
+          });              
       });
     });
   </script>
+

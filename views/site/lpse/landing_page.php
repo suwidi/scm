@@ -1,18 +1,8 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-
-use yii\widgets\ListView;
 use frontend\assets\AppAsset;
-use frontend\widgets\Alert;
-
 use yii\widgets\ActiveForm;
-
 	AppAsset::register($this);
-/*    echo "<pre>";
-    var_dump( \Yii::$app->request->cookies);*/
 ?>
 
  <div class="container">
@@ -29,8 +19,7 @@ use yii\widgets\ActiveForm;
                             <input type="text" class="form-control" placeholder="Kata Kunci Pengadaan" name="q" id="" value="<?php echo $dataPost; ?>">&nbsp;
                         </div> 
                          <div class="text-center">
-                            <?php //echo Html::submitButton('Search', ['class' => 'btn btn-info']) ?>
-                            <?= Html::submitButton('Advanced Search', ['class' => 'btn btn-warning']) ?>
+                            <?= Html::submitButton('Penelusuran Data', ['class' => 'btn btn-warning']) ?>
                         </div>
                 </form>
             </div>
