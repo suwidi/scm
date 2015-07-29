@@ -13,7 +13,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
-
+use app\models\AuditText;
 use app\models\AuditUser;
 use app\models\LpseDetail;
 use app\models\LpseDetailSearch;
@@ -101,6 +101,22 @@ class SiteController extends Controller
     		);			
 		}else{
             $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+            // update text log
+            if(!empty($_GET['q'])){
+                $textSearch = AuditText::findOne(['text' => $_GET['q'],]);
+                if(!empty($textSearch)){
+                    $textSearch->count = $textSearch->count+1;
+                    $textSearch->save();
+                }else{
+                   $textSearch = new AuditText;
+                   $textSearch->count =1;
+                   $textSearch->text=$_GET['q'];
+                   $textSearch->save();
+                   var_dump($textSearch->getErrors());die;
+
+                }
+            }
+            
 			return $this->render('lpse/index', 
 				[
 					'dataProvider' 	=> $dataProvider,
